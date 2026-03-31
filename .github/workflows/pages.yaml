@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ghcr.io/gha-analysis-template:latest
+      image: ghcr.io/gvegayon/gha-analysis-template:latest
 
     steps:
     - uses: actions/checkout@v6
