@@ -24,7 +24,7 @@ jobs:
     - name: Render English version
       run: |
         cd site
-        make render
+        quarto render .
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v4
