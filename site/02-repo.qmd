@@ -10,6 +10,12 @@ There is no one-size-fits-all structure for repositories, but there are some com
 
 - `data/`: Where the data is stored (duh!). BUT, it is a good practice to still have it, **even if we don't have data included in the repo**. The idea of the data folder is to indicate how to access the data (besides some documentation about it).
 
+- `scripts/`: Where *functions* are stored. This is mostly for reusable code that is shared across multiple analyses.
+
+- `analysis/`: Where the analysis scripts are stored. This is where you would put your [quarto](https://quarto.org/){target="_blank"} files (or Jupyter notebooks, etc.) that contain the code for your analysis.
+
+Now, for a repository that is meant to be used with GitHub Actions, we have to have the folliwing folder:
+
 - `.github/workflows/`: Where the workflow files are stored. Each workflow file is a YAML file that defines the workflow. Some common workflows include:
     - **Container build and push**: Take a container image and release it to one of the container registries (e.g., Docker Hub, GitHub Container Registry, etc.).
     - **GitHub Pages**: Build a website using GitHub Pages (e.g., using `quarto`).
@@ -19,4 +25,16 @@ There is no one-size-fits-all structure for repositories, but there are some com
     We will discuss some of these workflows later.
 
 
-- `AGENTS.md`: A markdown file that provides an overview of the agents used in the repository, how to use them, and any other relevant information.
+## AI-enhanced repositories
+
+In the case of projects that want to leverage AI agents, and particularly, GitHub's Copilot, here are some additional components that can be included in the repository:
+
+- `AGENTS.md`: A markdown file that provides an overview of the agents used in the repository, how to use them, and any other relevant information. (more about `AGENTS.md` [here](https://agents.md){target="_blank"}). An example of an `AGENTS.md` file can be found [here](https://github.com/UofUEpiBio/measles/blob/795b09d84313268e3d6a7a8ed9e3511e5c141894/AGENTS.md).
+
+- `.github/workflows/copilot-setup-steps.yml`: A workflow file that defines the steps to set up Copilot for the repository. This can include steps to install any necessary dependencies, configure Copilot settings, and provide instructions for how to use Copilot with the repository. An example of a `copilot-setup-steps.yml` file can be found [here](https://github.com/UofUEpiBio/measles/blob/795b09d84313268e3d6a7a8ed9e3511e5c141894/.github/workflows/copilot-setup-steps.yml).
+
+Having these two additional components in the repository can improve the quality of your interactions with GitHub Copilot. The `AGENTS.md` file provides additional context and instructions about the project, and the `copilot-setup-steps.yml` file ensures that your Copilot AI agent has the right starting point to execute the tasks you want it to do.
+
+::: {.callout-tip}
+One of the most productive uses I have found for GitHub Copilot is to assign it to address GitHub Issues in my projects. When you assign an issue to Copilot, it will generate a pull request with the code and use GitHub's compute resources to run the code and make sure it works. You can learn more about this feature [here](https://github.blog/ai-and-ml/github-copilot/assigning-and-completing-issues-with-coding-agent-in-github-copilot/#:~:text=Once%20you've%20written%20the,test%20coverage%20or%20updating%20documentation.){target="_blank"}.
+:::

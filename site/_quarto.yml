@@ -9,6 +9,14 @@ book:
     - 02-repo.qmd
     - 03-gha.qmd
     - 04-containers.qmd
+  navbar:
+    right:
+        - text: Git
+          menu: 
+          - href: https://epiforesite.github.io/r-pkgs-workshop/git/slides.html
+            text: Intro to Git slides
+          - href: https://epiforesite.github.io/r-pkgs-workshop/git/lab.html
+            text: Intro to Git lab
 
 format:
   html:

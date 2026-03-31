@@ -2,18 +2,50 @@
 title: Containers
 ---
 
-## Docker: What are containers
+Containers are a form of operating system virtualization that allow you to run applications in isolated environments. They are similar to virtual machines, but they are more lightweight and efficient because they share the host operating system's kernel.
+
+Containers are a fantastic way of standardizing your computing environment. Containers are the modern way of ensuring that your code runs the same way on different machines (yours, your collaborators', and GitHub's). They are also a great way of sharing your code with others, because they can be easily distributed and run on any machine that has a container runtime (e.g., Docker, Podman, etc.).
 
 > Containers are isolated from one another and bundle their own software, libraries and configuration files; they can communicate with each other through well-defined channels.[8] Because all of the containers share the services of a single operating system kernel, they use fewer resources than virtual machines -- [Wiki](https://en.wikipedia.org/w/index.php?title=Docker_(software)&oldid=1148220158){target="_blank"}
 
-## Docker's Architecture
+## The Rocker project
 
-![Source: https://docs.docker.com/get-started/overview/](https://docs.docker.com/get-started/images/docker-architecture.webp){width="90%" fig-align="center"}
+The Rocker project provides a set of Docker images for R that are maintained by the R community. These images are based on Debian and include various versions of R and popular R packages. The Rocker project also provides images for RStudio Server, which allows you to run RStudio in a container.
+
+Rocker containers can also be used as a base image for your own containers, including those used with GitHub Actions, as well as [devcontainers](https://containers.dev){target="_blank"} (which we can discuss in a future workshop).
+
+Some images I have found particularly useful for my work include:
+
+- [`rocker/r-ver`](https://github.com/rocker-org/rocker-versioned2): A baseline image that powers tidiverse, shiny, and geospatial containers.
+
+- [`rocker-org/devcontainer-images`](https://github.com/rocker-org/devcontainer-images)
+
+You can read more about the Rocker project at <https://rocker-project.org/>, and the corresponding paper [here](https://journal.r-project.org/articles/RJ-2017-065/RJ-2017-065.pdf){target="_blank"}. 
 
 ## The tidyverse image
 
 > rocker/tidyverse has already installed many R packages and their dependencies apt packages. e.g. the tidyverse package, the devtools package, the rmarkdown package, some R Database Interface packages, the data.table package, the fst package, and the Apache Arrow R package. -- Source: [Rocker Project](https://rocker-project.org/images/versioned/rstudio.html#overview)
 
-## Let's see it start-to-finish!
+## This project's container file
 
-[https://github.com/UofUEpiBio/PHS-7045-egga](https://github.com/UofUEpiBio/PHS-7045-egga){target="_blank"}
+```dockerfile
+FROM ghcr.io/rocker-org/devcontainer/r-ver:4.5
+
+# Architecture-specific variable (built in Docker BuildKit)
+ARG TARGETARCH
+
+# Install quarto-cli and the orange-book extension
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.9.35/quarto-1.9.35-linux-${TARGETARCH}.deb && \
+    dpkg -i quarto-1.9.35-linux-${TARGETARCH}.deb && \
+    rm quarto-1.9.35-linux-${TARGETARCH}.deb
+
+# Adding R packages
+RUN install2.r --error epiworldR tinytest data.table quarto cpp11
+
+# Adding python via uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+
+CMD ["bash"]
+```
+
+

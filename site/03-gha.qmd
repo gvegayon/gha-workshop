@@ -36,6 +36,20 @@ The core component of GitHub actions is the [workflow files](https://docs.github
 Using containers can reduce the time it takes to run a workflow. A similar effect can be achieved by caching software and dependencies.
 :::
 
+## The marketplace
+
+GitHub has a marketplace of pre-built actions that you can use in your workflows. This can save you a lot of time and effort, as you don't have to build everything from scratch. You can find actions for a wide variety of tasks, such as checking out code, setting up programming languages, running tests, etc. You can also create your own custom actions if you have specific needs that are not met by the existing actions. Some notable actions for this team are:
+
+- [`r-lib/actions`](https://github.com/r-lib/actions){target="_blank"} A collection of GitHub Actions for the R programming language, including actions for checking out code, setting up R, installing dependencies, and running tests.
+
+- [`quarto-dev/quarto-actions`](https://github.com/quarto-dev/quarto-actions){target="_blank"} A collection of GitHub Actions for the Quarto publishing system, including actions for setting up Quarto, rendering documents, and deploying websites.
+
+- [`astral-sh/setup-uv`](https://github.com/astral-sh/setup-uv){target="_blank"} A GitHub Action for setting up the uv Python package manager.
+
+- [`CDCgov/cfa-actions`](https://github.com/CDCgov/cfa-actions) Actions by CDC's Center for Forecasting and Analytics (by yours truly).
+
+You can find more GitHub Actions in the [GitHub Marketplace](https://github.com/marketplace?type=actions){target="_blank"}. 
+
 ## Hello world example
 
 The following workflow file--a simple "helloworld" example--can be found [here](./workflows/helloworld.yaml){target="_blank"}
